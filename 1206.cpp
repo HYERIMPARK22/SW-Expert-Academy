@@ -1,11 +1,59 @@
-#include <iostream>
+//#include <iostream>
+//#include <string.h>
+//using namespace std;
+//
+//int num, ans;
+//int buliding[1001];
+//
+////idx-2, idx-1, idx+1, idx+2 Áß °¡Àå ³ôÀº °ª ±¸ÇÏ±â
+//int findmaxheight(int idx) {
+//	int maxVal = buliding[idx - 2];
+//	int maxPlace = idx - 2;
+//
+//	if (maxVal < buliding[idx - 1]) {
+//		maxVal = buliding[idx - 1];
+//		maxPlace = idx - 1;
+//	}
+//	if (maxVal < buliding[idx + 1]) {
+//		maxVal = buliding[idx + 1];
+//		maxPlace = idx + 1;
+//	}
+//		if (maxVal < buliding[idx + 2]) {
+//			maxVal = buliding[idx + 2];
+//			maxPlace = idx + 2;
+//	}
+//
+//	return maxPlace;
+//}
+//
+//int main() {
+//	for (int i = 1; i <= 10; i++) {
+//		cin >> num;
+//		memset(buliding, 0, sizeof(int) * 1001);
+//		ans = 0;
+//
+//		for (int j = 0; j < num; j++) {
+//			cin >> buliding[j];
+//		}
+//		for (int j = 2; j < num - 2; j++) {
+//			int max_hidx = findmaxheight(j);
+//			if (buliding[j] > buliding[max_hidx])
+//				ans += buliding[j] - buliding[max_hidx];
+//		}
+//
+//		cout << '#' << i << ' ' << ans << endl;
+//	}
+//	return 0;
+//}
+
+
+#include<iostream>
 #include <string.h>
 using namespace std;
 
 int num, ans;
 int building[1001];
 
-//idx-2, idx-1, idx+1, idx+2 ì¤‘ ê°€ì¥ ë†’ì€ ê±´ë¬¼ ìœ„ì¹˜ êµ¬í•¨
 int findmaxheight(int idx) {
 	int maxVal = building[idx - 2];
 	int maxPlace = idx - 2;
@@ -23,12 +71,43 @@ int findmaxheight(int idx) {
 		maxPlace = idx + 2;
 	}
 	return maxPlace;
+	//if (building[idx - 2] >= building[idx - 1])
+	//{
+	//	if (building[idx - 2] >= building[idx + 1])
+	//	{
+	//		if (building[idx - 2] >= building[idx + 2])
+	//			return idx - 2;
+	//		else return idx + 2;
+	//	}
+	//	else
+	//	{
+	//		if (building[idx + 1] >= building[idx + 2])
+	//			return idx + 1;
+	//		else return idx + 2;
+	//	}
+	//}
+	//else
+	//{
+	//	if (building[idx - 1] >= building[idx + 1])
+	//	{
+	//		if (building[idx - 1] >= building[idx + 2])
+	//			return idx - 1;
+	//		else return idx + 2;
+	//	}
+	//	else
+	//	{
+	//		if (building[idx + 1] >= building[idx + 2])
+	//			return idx + 1;
+	//		else return idx + 2;
+	//	}
+	//}
+
 }
 
 int main(int argc, char** argv)
 {
 	/*
-	   ì—¬ëŸ¬ ê°œì˜ í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ê°€ ì£¼ì–´ì§€ë¯€ë¡œ, ê°ê°ì„ ì²˜ë¦¬í•©ë‹ˆë‹¤.
+	   ¿©·¯ °³ÀÇ Å×½ºÆ® ÄÉÀÌ½º°¡ ÁÖ¾îÁö¹Ç·Î, °¢°¢À» Ã³¸®ÇÕ´Ï´Ù.
 	*/
 	freopen("input.txt", "r", stdin);
 	for (int i = 1; i <= 10; i++)
@@ -36,13 +115,13 @@ int main(int argc, char** argv)
 		//int test_case;
 		int T;
 		/*
-		   ì•„ë˜ì˜ freopen í•¨ìˆ˜ëŠ” input.txt ë¥¼ read only í˜•ì‹ìœ¼ë¡œ ì—° í›„,
-		   ì•ìœ¼ë¡œ í‘œì¤€ ì…ë ¥(í‚¤ë³´ë“œ) ëŒ€ì‹  input.txt íŒŒì¼ë¡œë¶€í„° ì½ì–´ì˜¤ê² ë‹¤ëŠ” ì˜ë¯¸ì˜ ì½”ë“œì…ë‹ˆë‹¤.
-		   //ì—¬ëŸ¬ë¶„ì´ ì‘ì„±í•œ ì½”ë“œë¥¼ í…ŒìŠ¤íŠ¸ í•  ë•Œ, í¸ì˜ë¥¼ ìœ„í•´ì„œ input.txtì— ì…ë ¥ì„ ì €ì¥í•œ í›„,
-		   freopen í•¨ìˆ˜ë¥¼ ì´ìš©í•˜ë©´ ì´í›„ cin ì„ ìˆ˜í–‰í•  ë•Œ í‘œì¤€ ì…ë ¥ ëŒ€ì‹  íŒŒì¼ë¡œë¶€í„° ì…ë ¥ì„ ë°›ì•„ì˜¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
-		   ë”°ë¼ì„œ í…ŒìŠ¤íŠ¸ë¥¼ ìˆ˜í–‰í•  ë•Œì—ëŠ” ì•„ë˜ ì£¼ì„ì„ ì§€ìš°ê³  ì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì…”ë„ ì¢‹ìŠµë‹ˆë‹¤.
-		   freopen í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œëŠ” #include <cstdio>, í˜¹ì€ #include <stdio.h> ê°€ í•„ìš”í•©ë‹ˆë‹¤.
-		   ë‹¨, ì±„ì ì„ ìœ„í•´ ì½”ë“œë¥¼ ì œì¶œí•˜ì‹¤ ë•Œì—ëŠ” ë°˜ë“œì‹œ freopen í•¨ìˆ˜ë¥¼ ì§€ìš°ê±°ë‚˜ ì£¼ì„ ì²˜ë¦¬ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.
+		   ¾Æ·¡ÀÇ freopen ÇÔ¼ö´Â input.txt ¸¦ read only Çü½ÄÀ¸·Î ¿¬ ÈÄ,
+		   ¾ÕÀ¸·Î Ç¥ÁØ ÀÔ·Â(Å°º¸µå) ´ë½Å input.txt ÆÄÀÏ·ÎºÎÅÍ ÀĞ¾î¿À°Ú´Ù´Â ÀÇ¹ÌÀÇ ÄÚµåÀÔ´Ï´Ù.
+		   //¿©·¯ºĞÀÌ ÀÛ¼ºÇÑ ÄÚµå¸¦ Å×½ºÆ® ÇÒ ¶§, ÆíÀÇ¸¦ À§ÇØ¼­ input.txt¿¡ ÀÔ·ÂÀ» ÀúÀåÇÑ ÈÄ,
+		   freopen ÇÔ¼ö¸¦ ÀÌ¿ëÇÏ¸é ÀÌÈÄ cin À» ¼öÇàÇÒ ¶§ Ç¥ÁØ ÀÔ·Â ´ë½Å ÆÄÀÏ·ÎºÎÅÍ ÀÔ·ÂÀ» ¹Ş¾Æ¿Ã ¼ö ÀÖ½À´Ï´Ù.
+		   µû¶ó¼­ Å×½ºÆ®¸¦ ¼öÇàÇÒ ¶§¿¡´Â ¾Æ·¡ ÁÖ¼®À» Áö¿ì°í ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¼Åµµ ÁÁ½À´Ï´Ù.
+		   freopen ÇÔ¼ö¸¦ »ç¿ëÇÏ±â À§ÇØ¼­´Â #include <cstdio>, È¤Àº #include <stdio.h> °¡ ÇÊ¿äÇÕ´Ï´Ù.
+		   ´Ü, Ã¤Á¡À» À§ÇØ ÄÚµå¸¦ Á¦ÃâÇÏ½Ç ¶§¿¡´Â ¹İµå½Ã freopen ÇÔ¼ö¸¦ Áö¿ì°Å³ª ÁÖ¼® Ã³¸® ÇÏ¼Å¾ß ÇÕ´Ï´Ù.
 		*/
 		cin >> T;
 		//for (test_case = 1; test_case <= T; ++test_case) {
@@ -61,7 +140,12 @@ int main(int argc, char** argv)
 
 	}
 
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		/*
+			 ÀÌ ºÎºĞ¿¡ ¿©·¯ºĞÀÇ ¾Ë°í¸®Áò ±¸ÇöÀÌ µé¾î°©´Ï´Ù.
+		 */
+		 /////////////////////////////////////////////////////////////////////////////////////////////
 
-	return 0;//ì •ìƒì¢…ë£Œì‹œ ë°˜ë“œì‹œ 0ì„ ë¦¬í„´í•´ì•¼í•©ë‹ˆë‹¤.
+	return 0;//Á¤»óÁ¾·á½Ã ¹İµå½Ã 0À» ¸®ÅÏÇØ¾ßÇÕ´Ï´Ù.
 	
 }
