@@ -5,6 +5,7 @@ using namespace std;
 int num, ans;
 int building[1001];
 
+//idx-2, idx-1, idx+1, idx+2 중 가장 높은 건물 위치 구함
 int findmaxheight(int idx) {
 	int maxVal = building[idx - 2];
 	int maxPlace = idx - 2;
@@ -52,9 +53,9 @@ int main(int argc, char** argv)
 			cin >> building[j];
 		}
 		for (int j = 2; j < T - 2; j++) {
-			int max_hidx = findmaxheight(j);
-			if (building[j] > building[max_hidx])
-				ans += building[j] - building[max_hidx];
+			int max_place = findmaxheight(j);
+			if (building[j] > building[max_place])
+				ans += building[j] - building[max_place];
 		}
 		cout << '#' << i << ' ' << ans << endl;
 
