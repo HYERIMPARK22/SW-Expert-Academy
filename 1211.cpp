@@ -7,63 +7,19 @@ int arr[101][101];
 int visited[101][101];
 int dis, departure;
 
-//¿ŞÂÊ, ¿À¸¥ÂÊ, À§
-int dx[3] = { 0, 0, -1 };
-int dy[3] = { -1, 1, 0 };
-
-//xÁÂÇ¥ ¸®ÅÏ
-//int findPath(int x, int y) {
-//	while (1) {
-//		if (y - 1 < 0)
-//			return x;
-//		else {
-//			if (x - 1 >= 0 && map[y][x - 1] == 1) {
-//				map[y][x] = 0;
-//				--x;
-//				++newLength;
-//			}
-//			else if (x + 1 <= 99 && map[y][x + 1] == 1) {
-//				map[y][x] = 0;
-//				++x;
-//				++newLength;
-//			}
-//			else if (map[y - 1][x] == 1) {
-//				map[y][x] = 0;
-//				--y;
-//				++newLength;
-//			}
-//
-//		}
-//	}
-//}
-//
-//int shortestPath() {
-//	goalLength = 999999;
-//	for (int i = 0; i < cnt; i++) {
-//		newLength = 0;
-//		memcpy(map, arr, sizeof(arr));
-//		newX = findPath(99, goalX[i]);
-//		if (newLength < goalLength) {
-//			goalLength = newLength;
-//			goal = newX;
-//		}
-//		else if (newLength == goalLength && newX > goal) {
-//			goal = newX;
-//		}
-//	}
-//
-//	return goal;
-//}
+//ì™¼ìª½, ì˜¤ë¥¸ìª½, ìœ„
+int dx[3] = { -1, 1, 0 };
+int dy[3] = { 0, 0, -1 };
 
 void findDeparture(int x, int y) {
 	int local_distance = 0;
 	int local_x = x;
 	int local_y = y;
 	while (1) {
-		if (local_x == 0) {
+		if (local_y == 0) {
 			if (dis > local_distance) {
 				dis = local_distance;
-				departure = local_y;
+				departure = local_x;
 			}
 			return;
 		}
@@ -89,18 +45,18 @@ int main(int argc, char** argv)
 	int test_case;
 	int T;
 	/*
-	   ¾Æ·¡ÀÇ freopen ÇÔ¼ö´Â input.txt ¸¦ read only Çü½ÄÀ¸·Î ¿¬ ÈÄ,
-	   ¾ÕÀ¸·Î Ç¥ÁØ ÀÔ·Â(Å°º¸µå) ´ë½Å input.txt ÆÄÀÏ·ÎºÎÅÍ ÀĞ¾î¿À°Ú´Ù´Â ÀÇ¹ÌÀÇ ÄÚµåÀÔ´Ï´Ù.
-	   //¿©·¯ºĞÀÌ ÀÛ¼ºÇÑ ÄÚµå¸¦ Å×½ºÆ® ÇÒ ¶§, ÆíÀÇ¸¦ À§ÇØ¼­ input.txt¿¡ ÀÔ·ÂÀ» ÀúÀåÇÑ ÈÄ,
-	   freopen ÇÔ¼ö¸¦ ÀÌ¿ëÇÏ¸é ÀÌÈÄ cin À» ¼öÇàÇÒ ¶§ Ç¥ÁØ ÀÔ·Â ´ë½Å ÆÄÀÏ·ÎºÎÅÍ ÀÔ·ÂÀ» ¹Ş¾Æ¿Ã ¼ö ÀÖ½À´Ï´Ù.
-	   µû¶ó¼­ Å×½ºÆ®¸¦ ¼öÇàÇÒ ¶§¿¡´Â ¾Æ·¡ ÁÖ¼®À» Áö¿ì°í ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¼Åµµ ÁÁ½À´Ï´Ù.
-	   freopen ÇÔ¼ö¸¦ »ç¿ëÇÏ±â À§ÇØ¼­´Â #include <cstdio>, È¤Àº #include <stdio.h> °¡ ÇÊ¿äÇÕ´Ï´Ù.
-	   ´Ü, Ã¤Á¡À» À§ÇØ ÄÚµå¸¦ Á¦ÃâÇÏ½Ç ¶§¿¡´Â ¹İµå½Ã freopen ÇÔ¼ö¸¦ Áö¿ì°Å³ª ÁÖ¼® Ã³¸® ÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+	   ì•„ë˜ì˜ freopen í•¨ìˆ˜ëŠ” input.txt ë¥¼ read only í˜•ì‹ìœ¼ë¡œ ì—° í›„,
+	   ì•ìœ¼ë¡œ í‘œì¤€ ì…ë ¥(í‚¤ë³´ë“œ) ëŒ€ì‹  input.txt íŒŒì¼ë¡œë¶€í„° ì½ì–´ì˜¤ê² ë‹¤ëŠ” ì˜ë¯¸ì˜ ì½”ë“œì…ë‹ˆë‹¤.
+	   //ì—¬ëŸ¬ë¶„ì´ ì‘ì„±í•œ ì½”ë“œë¥¼ í…ŒìŠ¤íŠ¸ í•  ë•Œ, í¸ì˜ë¥¼ ìœ„í•´ì„œ input.txtì— ì…ë ¥ì„ ì €ì¥í•œ í›„,
+	   freopen í•¨ìˆ˜ë¥¼ ì´ìš©í•˜ë©´ ì´í›„ cin ì„ ìˆ˜í–‰í•  ë•Œ í‘œì¤€ ì…ë ¥ ëŒ€ì‹  íŒŒì¼ë¡œë¶€í„° ì…ë ¥ì„ ë°›ì•„ì˜¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+	   ë”°ë¼ì„œ í…ŒìŠ¤íŠ¸ë¥¼ ìˆ˜í–‰í•  ë•Œì—ëŠ” ì•„ë˜ ì£¼ì„ì„ ì§€ìš°ê³  ì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì…”ë„ ì¢‹ìŠµë‹ˆë‹¤.
+	   freopen í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œëŠ” #include <cstdio>, í˜¹ì€ #include <stdio.h> ê°€ í•„ìš”í•©ë‹ˆë‹¤.
+	   ë‹¨, ì±„ì ì„ ìœ„í•´ ì½”ë“œë¥¼ ì œì¶œí•˜ì‹¤ ë•Œì—ëŠ” ë°˜ë“œì‹œ freopen í•¨ìˆ˜ë¥¼ ì§€ìš°ê±°ë‚˜ ì£¼ì„ ì²˜ë¦¬ í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.
 	*/
 	freopen("input.txt", "r", stdin);
 	//cin >> T;
 	/*
-	   ¿©·¯ °³ÀÇ Å×½ºÆ® ÄÉÀÌ½º°¡ ÁÖ¾îÁö¹Ç·Î, °¢°¢À» Ã³¸®ÇÕ´Ï´Ù.
+	   ì—¬ëŸ¬ ê°œì˜ í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ê°€ ì£¼ì–´ì§€ë¯€ë¡œ, ê°ê°ì„ ì²˜ë¦¬í•©ë‹ˆë‹¤.
 	*/
 	for (test_case = 1; test_case <= 10; ++test_case)
 	{
@@ -109,16 +65,16 @@ int main(int argc, char** argv)
 		cin >> T;
 		for (int i = 0; i < 100; i++) {
 			for (int j = 0; j < 100; j++) {
-				cin >> arr[i][j];
+				cin >> arr[j][i];
 			}
 		}
 
 		for (int i = 0; i < 100; i++) {
 			memset(visited, 0, sizeof(visited));
-			if (arr[99][i]) findDeparture(99, i);
+			if (arr[i][99]) findDeparture(i, 99);
 		}
 
 		cout << '#' << T << ' ' << departure << endl;
 	}
-	return 0;//Á¤»óÁ¾·á½Ã ¹İµå½Ã 0À» ¸®ÅÏÇØ¾ßÇÕ´Ï´Ù.
+	return 0;//ì •ìƒì¢…ë£Œì‹œ ë°˜ë“œì‹œ 0ì„ ë¦¬í„´í•´ì•¼í•©ë‹ˆë‹¤.
 }
